@@ -1,0 +1,447 @@
+# ===========================================
+# Verix AI - Master .gitignore
+# Root directory file - applies to entire project
+# ===========================================
+
+# ---------------------------
+# Python Backend
+# ---------------------------
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+pythonenv*
+venv/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# pdm
+.pdm.toml
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+.env.development
+.env.test
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# ---------------------------
+# API Keys & Secrets
+# ---------------------------
+
+# Secret files
+.secrets/
+secrets/
+keys/
+*.key
+*.pem
+*.crt
+*.cer
+*.p12
+*.pfx
+credentials.json
+service-account.json
+*.secret
+*.secret.txt
+
+# API keys files
+api_keys.txt
+keys.txt
+secrets.txt
+
+# ---------------------------
+# Frontend / Node.js
+# ---------------------------
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
+
+# Frontend build outputs
+dist/
+dist-ssr/
+*.local
+out/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*.swo
+*~
+
+# Frontend environment
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# Bundle analytics
+stats.json
+webpack-stats.json
+
+# Vite
+vite.config.js.timestamp-*
+
+# ---------------------------
+# Logs & Databases
+# ---------------------------
+
+# Logs
+logs/
+*.log
+error_logs/
+debug.log
+access.log
+error.log
+combined.log
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Backup files
+*.bak
+*.backup
+*.tmp
+*.temp
+*.old
+*.orig
+
+# ---------------------------
+# OS Generated Files
+# ---------------------------
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.DS_Store
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.downloads
+.*.swp
+.*.swo
+
+# ---------------------------
+# IDE & Editor Files
+# ---------------------------
+
+# VS Code
+.vscode/
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+*.code-workspace
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Sublime Text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# ---------------------------
+# Docker & Containers
+# ---------------------------
+
+# Docker
+docker-compose.override.yml
+docker-compose.prod.yml
+*.pid
+docker-compose.*.yml
+.env.docker
+.dockerignore
+
+# Kubernetes
+*.kubeconfig
+*.secret.yaml
+secrets.yaml
+
+# ---------------------------
+# Deployment & Package Manager
+# ---------------------------
+
+# Package locks (optional - uncomment if needed)
+# package-lock.json
+# yarn.lock
+# Pipfile.lock
+
+# Deployment artifacts
+.deploy/
+deployments/
+.vercel/
+.netlify/
+.railway/
+.render/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# ---------------------------
+# Application Specific
+# ---------------------------
+
+# Verix AI specific
+backend/app/__pycache__/
+backend/.env
+backend/*.log
+backend/temp/
+backend/tmp/
+frontend/dist/
+frontend/build/
+frontend/.env.local
+*.verix.db
+verix_cache/
+uploads/
+temp_files/
+
+# Session files
+*.session
+sessions/
+
+# Reports
+reports/
+audit_reports/
+compliance_reports/
+*.pdf
+*.csv
+*.xlsx
+
+# ---------------------------
+# Testing & Coverage
+# ---------------------------
+
+# Test artifacts
+.coverage
+.coverage.*
+.coverage.lcov
+.nyc_output/
+coverage/
+coverage.json
+htmlcov/
+.junit/
+test-results/
+.pytest_cache/
+.tox/
+.nox/
+
+# ---------------------------
+# Misc
+# ---------------------------
+
+# Local configuration
+*.local
+*.local.yml
+*.local.json
+*.local.toml
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Certificates and keys
+*.p12
+*.pfx
+*.crt
+*.key
+*.csr
+
+# Memory dumps
+*.dump
+*.heap
+*.hprof
+
+# ---------------------------
+# Security Critical Files
+# ---------------------------
+
+# NEVER push these files to git
+.secret/
+secrets.yml
+secrets.json
+config/secrets.yml
+credentials/
+*.secret
+*.key
+*.pem
+*.private
+*.pgp
+*.gpg
