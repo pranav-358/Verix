@@ -34,7 +34,7 @@ Verix AI is an explainable financial dispute intelligence platform that helps co
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/verix-ai.git
+git clone https://github.com/pranav-358/verix-ai.git
 cd verix-ai
 
 # Create virtual environment
