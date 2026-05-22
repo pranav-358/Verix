@@ -1,13 +1,55 @@
 # ===========================================
-# Verix AI - Master .gitignore
-# Root directory file - applies to entire project
+# Verix AI - Complete .gitignore
+# Root directory - Place in main project folder
 # ===========================================
+
+# ---------------------------
+# CRITICAL: API KEYS & SECRETS
+# NEVER push these files to GitHub!
+# ---------------------------
+
+# Environment files with REAL secrets
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+.env.development
+.env.test
+.venv
+.env.backup
+.env.old
+
+# ✅ SAFE to commit: .env.example (template without real keys)
+# ✅ SAFE to commit: .env.sample
+# ✅ SAFE to commit: .env.template
+
+# Secret files
+.secrets/
+secrets/
+keys/
+private/
+credentials.json
+service-account.json
+*.secret
+*.secret.txt
+api_keys.txt
+keys.txt
+secrets.txt
+*.key
+*.pem
+*.crt
+*.cer
+*.p12
+*.pfx
+*.p8
+*.json.key
 
 # ---------------------------
 # Python Backend
 # ---------------------------
 
-# Byte-compiled / optimized / DLL files
+# Byte-compiled / optimized files
 __pycache__/
 *.py[cod]
 *$py.class
@@ -23,6 +65,8 @@ venv.bak/
 .venv/
 pythonenv*
 venv/
+ENV3/
+ENV2/
 
 # Distribution / packaging
 .Python
@@ -58,116 +102,40 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *.cover
-*.py,cover
 .hypothesis/
 .pytest_cache/
 cover/
+test-reports/
 
-# Django stuff:
+# Logs
 *.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+logs/
+error_logs/
+debug.log
+access.log
+error.log
+combined.log
+app.log
+server.log
 
-# Flask stuff:
-instance/
-.webassets-cache
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+*.db3
 
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-.pybuilder/
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-.python-version
-
-# pipenv
-Pipfile.lock
-
-# poetry
-poetry.lock
-
-# pdm
-.pdm.toml
-
-# PEP 582
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.env.local
-.env.*.local
-.env.production
-.env.staging
-.env.development
-.env.test
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# pytype static type analyzer
-.pytype/
-
-# Cython debug symbols
-cython_debug/
-
-# ---------------------------
-# API Keys & Secrets
-# ---------------------------
-
-# Secret files
-.secrets/
-secrets/
-keys/
-*.key
-*.pem
-*.crt
-*.cer
-*.p12
-*.pfx
-credentials.json
-service-account.json
-*.secret
-*.secret.txt
-
-# API keys files
-api_keys.txt
-keys.txt
-secrets.txt
+# Backup files
+*.bak
+*.backup
+*.tmp
+*.temp
+*.old
+*.orig
+*.swp
+*.swo
 
 # ---------------------------
 # Frontend / Node.js
@@ -186,22 +154,11 @@ dist/
 dist-ssr/
 *.local
 out/
+build/
+.next/
+.nuxt/
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea/
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-*.swp
-*.swo
-*~
-
-# Frontend environment
+# Frontend environment (with real keys)
 .env.development.local
 .env.test.local
 .env.production.local
@@ -213,35 +170,7 @@ webpack-stats.json
 
 # Vite
 vite.config.js.timestamp-*
-
-# ---------------------------
-# Logs & Databases
-# ---------------------------
-
-# Logs
-logs/
-*.log
-error_logs/
-debug.log
-access.log
-error.log
-combined.log
-
-# Database files
-*.db
-*.sqlite
-*.sqlite3
-*.db-journal
-*.db-wal
-*.db-shm
-
-# Backup files
-*.bak
-*.backup
-*.tmp
-*.temp
-*.old
-*.orig
+.vite/
 
 # ---------------------------
 # OS Generated Files
@@ -257,6 +186,8 @@ combined.log
 ehthumbs.db
 Thumbs.db
 *.DS_Store
+.AppleDB
+.AppleDesktop
 
 # Windows
 Thumbs.db
@@ -266,6 +197,10 @@ ehthumbs_vista.db
 *.stackdump
 [Dd]esktop.ini
 $RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
 
 # Linux
 *~
@@ -273,6 +208,8 @@ $RECYCLE.BIN/
 .downloads
 .*.swp
 .*.swo
+.*.swn
+.nfs*
 
 # ---------------------------
 # IDE & Editor Files
@@ -280,11 +217,17 @@ $RECYCLE.BIN/
 
 # VS Code
 .vscode/
-.vscode/settings.json
-.vscode/tasks.json
-.vscode/launch.json
-.vscode/extensions.json
-*.code-workspace
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*.swo
+*~
+*.orig
 
 # IntelliJ IDEA
 .idea/
@@ -292,6 +235,7 @@ $RECYCLE.BIN/
 *.iws
 *.ipr
 out/
+.idea_modules/
 
 # Sublime Text
 *.tmlanguage.cache
@@ -305,6 +249,18 @@ out/
 .classpath
 .settings/
 bin/
+.metadata/
+
+# PyCharm
+.idea/
+.python_env/
+PyCharm/
+
+# Vim
+*.swp
+*.swo
+*~
+.*.un~
 
 # ---------------------------
 # Docker & Containers
@@ -317,20 +273,18 @@ docker-compose.prod.yml
 docker-compose.*.yml
 .env.docker
 .dockerignore
+Dockerfile.dev
 
 # Kubernetes
 *.kubeconfig
 *.secret.yaml
 secrets.yaml
+*.secrets.yaml
+kubeconfig
 
 # ---------------------------
-# Deployment & Package Manager
+# Deployment & Cloud
 # ---------------------------
-
-# Package locks (optional - uncomment if needed)
-# package-lock.json
-# yarn.lock
-# Pipfile.lock
 
 # Deployment artifacts
 .deploy/
@@ -339,6 +293,8 @@ deployments/
 .netlify/
 .railway/
 .render/
+.heroku/
+.cloudflare/
 
 # Terraform
 *.tfstate
@@ -353,35 +309,53 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+# Serverless
+.serverless/
+.serverless_nextjs/
+
 # ---------------------------
-# Application Specific
+# Application Specific - Verix AI
 # ---------------------------
 
-# Verix AI specific
+# Verix AI specific directories
 backend/app/__pycache__/
 backend/.env
+backend/.env.*
 backend/*.log
 backend/temp/
 backend/tmp/
+backend/uploads/
+backend/reports/
+backend/audit_logs/
+
+# Frontend specific
 frontend/dist/
 frontend/build/
 frontend/.env.local
+frontend/node_modules/
+
+# Data files
 *.verix.db
 verix_cache/
-uploads/
+cache/
 temp_files/
-
-# Session files
-*.session
 sessions/
+*.session
+user_sessions/
 
-# Reports
+# Report files
 reports/
 audit_reports/
 compliance_reports/
 *.pdf
 *.csv
 *.xlsx
+*.xls
+
+# Uploaded files
+uploads/
+user_uploads/
+temp_uploads/
 
 # ---------------------------
 # Testing & Coverage
@@ -400,22 +374,22 @@ test-results/
 .pytest_cache/
 .tox/
 .nox/
+.tests/
+test_output/
 
 # ---------------------------
-# Misc
+# Misc & Archives
 # ---------------------------
-
-# Local configuration
-*.local
-*.local.yml
-*.local.json
-*.local.toml
 
 # Archives
 *.zip
 *.tar.gz
-*.rar
+*.tar.bz2
+*.tar
 *.7z
+*.rar
+*.gz
+*.bz2
 
 # Certificates and keys
 *.p12
@@ -423,25 +397,47 @@ test-results/
 *.crt
 *.key
 *.csr
+*.pem
+*.cer
 
 # Memory dumps
 *.dump
 *.heap
 *.hprof
+*.core
+
+# Documentation build
+docs/_build/
+docs/build/
+site/
 
 # ---------------------------
-# Security Critical Files
+# Local Development
 # ---------------------------
 
-# NEVER push these files to git
-.secret/
-secrets.yml
-secrets.json
-config/secrets.yml
-credentials/
-*.secret
-*.key
-*.pem
-*.private
-*.pgp
-*.gpg
+# Local configuration files
+*.local
+*.local.yml
+*.local.json
+*.local.toml
+*.local.yaml
+config.local.*
+settings.local.*
+
+# Debug files
+debug/
+debug.log
+debug.txt
+*.pid
+
+# Temporary & Cache
+.cache/
+cache/
+*.cache
+*.cached
+*.tmp_cache
+tmp/
+temp/
+*.tmp
+*.temp
+*.temp.*
