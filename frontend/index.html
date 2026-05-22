@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verix AI | Financial Dispute Intelligence Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #0F172A;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1E293B;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #6D28D9;
+            border-radius: 3px;
+        }
+        
+        .message-enter {
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .audit-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        textarea:focus, input:focus {
+            outline: none;
+            ring: 2px solid #6D28D9;
+        }
+        
+        .transition-fade {
+            transition: opacity 0.4s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- Landing View -->
+        <div id="landingView" class="min-h-screen flex items-center justify-center px-4 transition-fade">
+            <div class="max-w-3xl mx-auto text-center">
+                <div class="mb-8">
+                    <svg class="w-16 h-16 mx-auto text-[#6D28D9]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+                    Deterministic AI Compliance Infrastructure for Financial Operations
+                </h1>
+                <p class="text-lg text-gray-400 mb-8">
+                    AI-driven dispute intelligence for consumers, merchants, and enterprise audit workflows.
+                </p>
+                <button onclick="showAuthModal()" class="px-8 py-3 bg-[#6D28D9] hover:bg-[#5B21B6] text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105">
+                    Initialize Verix Console
+                </button>
+            </div>
+        </div>
+
+        <!-- Auth Modal -->
+        <div id="authModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden transition-all duration-300">
+            <div class="bg-[#0F172A] border border-[#1E293B] rounded-xl p-8 max-w-md w-full mx-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-white">Access Console</h2>
+                    <button onclick="closeAuthModal()" class="text-gray-400 hover:text-white">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-4">
+                    <button onclick="selectRole('consumer')" class="w-full p-4 border border-[#1E293B] rounded-lg hover:border-[#6D28D9] transition-all duration-300 text-left group">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white group-hover:text-[#6D28D9]">Consumer Access Engine</div>
+                                <div class="text-sm text-gray-400 mt-1">Transaction disputes, refund tracking, payment verification</div>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400 group-hover:text-[#6D28D9]"></i>
+                        </div>
+                    </button>
+                    
+                    <button onclick="selectRole('vendor')" class="w-full p-4 border border-[#1E293B] rounded-lg hover:border-[#6D28D9] transition-all duration-300 text-left group">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white group-hover:text-[#6D28D9]">Merchant Partner Console</div>
+                                <div class="text-sm text-gray-400 mt-1">Invoice reconciliation, compliance verification, audit workflows</div>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400 group-hover:text-[#6D28D9]"></i>
+                        </div>
+                    </button>
+                </div>
+                
+                <div class="mt-6 pt-6 border-t border-[#1E293B]">
+                    <div class="text-xs text-gray-500 text-center">
+                        Enterprise-grade compliance infrastructure
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard View -->
+        <div id="dashboardView" class="hidden min-h-screen">
+            <header class="border-b border-[#1E293B] bg-[#0F172A] sticky top-0 z-10">
+                <div class="container mx-auto px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-8 h-8 text-[#6D28D9]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                            <div>
+                                <span class="text-white font-semibold">Verix AI</span>
+                                <span id="roleBadge" class="ml-2 text-xs px-2 py-1 bg-[#6D28D9] bg-opacity-20 text-[#6D28D9] rounded"></span>
+                            </div>
+                        </div>
+                        <button onclick="resetToLanding()" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="log-out" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="container mx-auto px-6 py-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Left Panel -->
+                    <div class="lg:col-span-2 space-y-4">
+                        <div class="bg-[#0F172A] border border-[#1E293B] rounded-lg overflow-hidden">
+                            <div class="border-b border-[#1E293B] px-6 py-3 bg-[#0F172A]">
+                                <div class="flex items-center space-x-2">
+                                    <i data-lucide="message-square" class="w-4 h-4 text-[#6D28D9]"></i>
+                                    <span class="text-sm font-medium text-gray-300">Dispute Resolution Interface</span>
+                                </div>
+                            </div>
+                            
+                            <div id="messagesContainer" class="h-96 overflow-y-auto p-6 space-y-4">
+                                <div class="text-center text-gray-500 text-sm py-8">
+                                    <i data-lucide="shield" class="w-8 h-8 mx-auto mb-2 text-gray-600"></i>
+                                    <p>Ready to process compliance requests</p>
+                                    <p class="text-xs mt-1">Describe the transaction discrepancy below</p>
+                                </div>
+                            </div>
+                            
+                            <div class="border-t border-[#1E293B] p-4">
+                                <div class="flex space-x-3">
+                                    <textarea id="messageInput" rows="2" placeholder="Example: Transaction TXN-12345 charged me $99.99 twice on May 20th" class="flex-1 bg-[#1E293B] border border-[#334155] rounded-lg px-4 py-2 text-white placeholder-gray-400 resize-none focus:border-[#6D28D9] transition-colors"></textarea>
+                                    <button onclick="sendMessage()" id="sendButton" class="px-6 bg-[#6D28D9] hover:bg-[#5B21B6] text-white font-semibold rounded-lg transition-all duration-300">
+                                        <i data-lucide="send" class="w-5 h-5"></i>
+                                    </button>
+                                </div>
+                                <div class="text-xs text-gray-500 mt-2">
+                                    <i data-lucide="info" class="w-3 h-3 inline mr-1"></i>
+                                    Provide transaction ID, amount, and dispute type for faster analysis
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel -->
+                    <div class="space-y-4">
+                        <div class="bg-[#0F172A] border border-[#1E293B] rounded-lg overflow-hidden">
+                            <div class="border-b border-[#1E293B] px-6 py-3">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <i data-lucide="clipboard-check" class="w-4 h-4 text-[#6D28D9]"></i>
+                                        <span class="text-sm font-medium text-gray-300">Live Audit Matrix</span>
+                                    </div>
+                                    <div id="auditStatusIndicator" class="flex items-center space-x-1">
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <span class="text-xs text-gray-400">Monitoring</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="complianceChecks" class="p-6 space-y-3">
+                                <div class="text-center text-gray-500 text-sm py-4">
+                                    <i data-lucide="activity" class="w-6 h-6 mx-auto mb-2 text-gray-600"></i>
+                                    <p>Awaiting compliance input</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-[#0F172A] border border-[#1E293B] rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center space-x-2">
+                                    <i data-lucide="shield-check" class="w-4 h-4 text-[#6D28D9]"></i>
+                                    <span class="text-sm font-medium text-gray-300">System Status</span>
+                                </div>
+                                <span id="systemStatus" class="text-xs px-2 py-1 bg-yellow-500 bg-opacity-20 text-yellow-500 rounded">Open</span>
+                            </div>
+                            <div id="extractedInfo" class="space-y-2 text-sm">
+                                <div class="text-gray-400">No transaction data extracted</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const API_BASE_URL = 'http://localhost:8000';
+        
+        // Global state
+        let currentRole = null;
+        let sessionId = null;
+        
+        // Check backend connection on load
+        async function checkBackendConnection() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/health`);
+                if (response.ok) {
+                    console.log('Backend connected successfully');
+                    return true;
+                }
+            } catch (error) {
+                console.warn('Backend not reachable:', error);
+                showConnectionError();
+                return false;
+            }
+            return false;
+        }
+        
+        function showConnectionError() {
+            const container = document.getElementById('messagesContainer');
+            if (container && currentRole) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'message-enter flex justify-start';
+                errorDiv.innerHTML = `
+                    <div class="bg-red-900 border border-red-700 rounded-lg px-4 py-2 max-w-[80%]">
+                        <p class="text-sm text-red-200">⚠️ Cannot connect to Verix backend. Please ensure the backend server is running at ${API_BASE_URL}</p>
+                        <p class="text-xs text-red-300 mt-1">Run: cd backend && uvicorn app.main:app --reload --port 8000</p>
+                    </div>
+                `;
+                container.appendChild(errorDiv);
+                container.scrollTop = container.scrollHeight;
+            }
+        }
+        
+        // Role selection
+        window.selectRole = async (role) => {
+            currentRole = role;
+            sessionId = generateSessionId();
+            closeAuthModal();
+            
+            const roleBadge = document.getElementById('roleBadge');
+            if (roleBadge) {
+                roleBadge.textContent = role === 'consumer' ? 'Consumer Console' : 'Merchant Console';
+            }
+            
+            document.getElementById('landingView').classList.add('hidden');
+            document.getElementById('dashboardView').classList.remove('hidden');
+            
+            // Check backend connection
+            await checkBackendConnection();
+            
+            setTimeout(() => {
+                addWelcomeMessage();
+            }, 100);
+            
+            lucide.createIcons();
+        };
+        
+        window.showAuthModal = () => {
+            document.getElementById('authModal').classList.remove('hidden');
+            lucide.createIcons();
+        };
+        
+        window.closeAuthModal = () => {
+            document.getElementById('authModal').classList.add('hidden');
+        };
+        
+        window.resetToLanding = () => {
+            currentRole = null;
+            sessionId = null;
+            document.getElementById('dashboardView').classList.add('hidden');
+            document.getElementById('landingView').classList.remove('hidden');
+            clearAuditMatrix();
+        };
+        
+        function generateSessionId() {
+            return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
+        
+        function addWelcomeMessage() {
+            const welcomeText = currentRole === 'consumer' 
+                ? "Welcome to Verix Consumer Support. Please describe your transaction issue including the transaction ID, amount, and what discrepancy you're experiencing.\n\nExample: 'Transaction TXN-12345 charged me $99.99 twice on May 20th'"
+                : "Welcome to Verix Merchant Compliance. Please provide invoice details, transaction references, and any compliance discrepancies you've identified.\n\nExample: 'Invoice INV-2024-001 for $1,500 shows incorrect tax calculation'";
+            
+            addMessage('assistant', welcomeText);
+        }
+        
+        function addMessage(role, content) {
+            const container = document.getElementById('messagesContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message-enter flex ${role === 'user' ? 'justify-end' : 'justify-start'}`;
+            
+            const bubbleClass = role === 'user' 
+                ? 'bg-[#6D28D9] text-white' 
+                : 'bg-[#1E293B] text-gray-200';
+            
+            messageDiv.innerHTML = `
+                <div class="max-w-[80%] ${bubbleClass} rounded-lg px-4 py-2">
+                    <p class="text-sm whitespace-pre-wrap">${escapeHtml(content)}</p>
+                </div>
+            `;
+            
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function updateAuditMatrix(complianceChecks, extractedEntities, systemStatus) {
+            const container = document.getElementById('complianceChecks');
+            if (!container) return;
+            
+            if (!complianceChecks || complianceChecks.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-gray-500 text-sm py-4">
+                        <i data-lucide="activity" class="w-6 h-6 mx-auto mb-2 text-gray-600"></i>
+                        <p>No compliance checks available</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+            
+            container.innerHTML = complianceChecks.map(check => {
+                let statusColor = 'gray';
+                let statusIcon = 'circle';
+                if (check.status === 'PASSED') {
+                    statusColor = 'green';
+                    statusIcon = 'check-circle';
+                } else if (check.status === 'FAILED') {
+                    statusColor = 'red';
+                    statusIcon = 'x-circle';
+                } else {
+                    statusColor = 'yellow';
+                    statusIcon = 'clock';
+                }
+                
+                return `
+                    <div class="border border-[#1E293B] rounded-lg p-3">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center space-x-2">
+                                <i data-lucide="${statusIcon}" class="w-4 h-4 text-${statusColor}-500"></i>
+                                <span class="text-sm font-medium text-white">${escapeHtml(check.rule_name)}</span>
+                            </div>
+                            <span class="text-xs px-2 py-1 bg-${statusColor}-500 bg-opacity-20 text-${statusColor}-500 rounded">${check.status}</span>
+                        </div>
+                        <p class="text-xs text-gray-400">${escapeHtml(check.audit_message)}</p>
+                    </div>
+                `;
+            }).join('');
+            
+            const extractedContainer = document.getElementById('extractedInfo');
+            if (extractedContainer && extractedEntities) {
+                extractedContainer.innerHTML = `
+                    <div class="space-y-1 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Transaction ID:</span>
+                            <span class="text-gray-300 font-mono">${escapeHtml(extractedEntities.transaction_id || 'Not provided')}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Amount:</span>
+                            <span class="text-gray-300">${extractedEntities.amount > 0 ? `$${extractedEntities.amount.toFixed(2)}` : 'Not provided'}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Dispute Type:</span>
+                            <span class="text-gray-300">${escapeHtml(extractedEntities.dispute_type ? extractedEntities.dispute_type.replace(/_/g, ' ') : 'Not classified')}</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            const statusEl = document.getElementById('systemStatus');
+            if (statusEl && systemStatus) {
+                let statusColor = systemStatus === 'open' ? 'yellow' : 'red';
+                statusEl.className = `text-xs px-2 py-1 bg-${statusColor}-500 bg-opacity-20 text-${statusColor}-500 rounded`;
+                statusEl.textContent = systemStatus === 'open' ? 'Open' : 'Under Review';
+            }
+            
+            lucide.createIcons();
+        }
+        
+        function clearAuditMatrix() {
+            const container = document.getElementById('complianceChecks');
+            if (container) {
+                container.innerHTML = `
+                    <div class="text-center text-gray-500 text-sm py-4">
+                        <i data-lucide="activity" class="w-6 h-6 mx-auto mb-2 text-gray-600"></i>
+                        <p>Awaiting compliance input</p>
+                    </div>
+                `;
+            }
+            
+            const extractedContainer = document.getElementById('extractedInfo');
+            if (extractedContainer) {
+                extractedContainer.innerHTML = `
+                    <div class="text-gray-400">No transaction data extracted</div>
+                `;
+            }
+            
+            lucide.createIcons();
+        }
+        
+        async function sendMessage() {
+            const inputEl = document.getElementById('messageInput');
+            const message = inputEl.value.trim();
+            
+            if (!message || !currentRole) {
+                if (!message) alert('Please enter a message');
+                return;
+            }
+            
+            const sendBtn = document.getElementById('sendButton');
+            sendBtn.disabled = true;
+            sendBtn.classList.add('opacity-50');
+            
+            addMessage('user', message);
+            inputEl.value = '';
+            
+            // Show typing indicator
+            const container = document.getElementById('messagesContainer');
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typingIndicator';
+            typingDiv.className = 'flex justify-start';
+            typingDiv.innerHTML = `
+                <div class="bg-[#1E293B] rounded-lg px-4 py-2">
+                    <div class="flex space-x-1">
+                        <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation: bounce 1.4s infinite ease-in-out both; animation-delay: -0.32s;"></div>
+                        <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation: bounce 1.4s infinite ease-in-out both; animation-delay: -0.16s;"></div>
+                        <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation: bounce 1.4s infinite ease-in-out both;"></div>
+                    </div>
+                </div>
+            `;
+            
+            // Add bounce animation style if not present
+            if (!document.querySelector('#bounceStyle')) {
+                const style = document.createElement('style');
+                style.id = 'bounceStyle';
+                style.textContent = `
+                    @keyframes bounce {
+                        0%, 80%, 100% { transform: scale(0); }
+                        40% { transform: scale(1); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            container.appendChild(typingDiv);
+            container.scrollTop = container.scrollHeight;
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        role: currentRole,
+                        session_id: sessionId
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                const typingEl = document.getElementById('typingIndicator');
+                if (typingEl) typingEl.remove();
+                
+                addMessage('assistant', data.conversational_response);
+                updateAuditMatrix(data.compliance_checks, data.extracted_entities, data.system_status_update);
+                
+            } catch (error) {
+                console.error('API Error:', error);
+                
+                const typingEl = document.getElementById('typingIndicator');
+                if (typingEl) typingEl.remove();
+                
+                addMessage('assistant', `❌ Unable to process request. Backend error: ${error.message}\n\nMake sure the backend server is running on ${API_BASE_URL}`);
+                
+                updateAuditMatrix([
+                    {
+                        rule_id: "ERR_001",
+                        rule_name: "System Connectivity",
+                        status: "FAILED",
+                        audit_message: `Cannot connect to Verix backend at ${API_BASE_URL}. Please verify the server is running.`
+                    }
+                ], {}, "under_review");
+            } finally {
+                sendBtn.disabled = false;
+                sendBtn.classList.remove('opacity-50');
+                inputEl.focus();
+            }
+        }
+        
+        // Enter key to send
+        document.addEventListener('DOMContentLoaded', () => {
+            const textarea = document.getElementById('messageInput');
+            if (textarea) {
+                textarea.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        sendMessage();
+                    }
+                });
+            }
+            lucide.createIcons();
+        });
+        
+        // Close modal when clicking outside
+        window.onclick = (event) => {
+            const modal = document.getElementById('authModal');
+            if (event.target === modal) {
+                closeAuthModal();
+            }
+        };
+    </script>
+</body>
+</html>
